@@ -16,16 +16,22 @@ class Note():
       self.dic[name] = mixer.Sound(note)
 
 
-  def play(self):
-    note = self.dic['A']
+  def play(self,note):
+    note = note.upper()
+    note = self.dic[note]
     note.play()
-    time.sleep(5)
+    time.sleep(1.5)
 
 
-
+class Interface():
+  def playSequence(self,note,sequence):
+    for key in sequence:
+      note.play(key)
+    
 
 
 
 if __name__ == '__main__':
+  UI = Interface()
   sound = Note()
-  sound.play()
+  UI.playSequence(sound,'CCCDDDEEEFFF')
