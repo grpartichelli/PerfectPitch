@@ -7,7 +7,6 @@ import time
 
 class Sound():
   def __init__(self):
-    print("init\n\n")
     mixer.init()
     self.dic = {}
     for note in glob.glob("./Music_Note/piano/*.wav"):
