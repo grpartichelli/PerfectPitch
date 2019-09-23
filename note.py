@@ -9,17 +9,33 @@ class Sound():
   def __init__(self):
     mixer.init()
     self.dic = {}
-    for note in glob.glob("./Music_Note/piano/*.wav"):
+    self.octave = 4
+    for note in glob.glob("./Music_Note/piano2/*.ogg"):
       #excludes path and extension from file
-      name = note[19:-4]
+      name = note[20:-4]
+      name = name.upper()
       self.dic[name] = mixer.Sound(note)
 
 
   def play(self,note,vol = 1):
+    note = note + str(self.octave)
     note = self.dic[note]
     note.set_volume(vol)
     note.play()
     time.sleep(1.1)
+
+
+  def increaseOctave(self):
+    if self.octave >= 0 and self.octave < 7:
+      self.octave += 1
+
+  def decreaseOctave(self):
+    if self.octave > 0 :
+      self.octave -= 1
+
+
+
+
 
 
 class Interface():
@@ -40,14 +56,16 @@ class Interface():
         volume = volume/2
       
       elif key == 'O':
+        #octave
         if nextKey == '+':
-          print("octave upper")
+          sound.increaseOctave()
         if nextKey == '-':
-          print("octave lowe")
-     
+          sound.decreaseOctave()    
       else:
-        sound.play(key,volume)
-      
+        try:
+          sound.play(key,volume)
+        except:
+          pass #nope
       
 
 
