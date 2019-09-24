@@ -7,7 +7,7 @@ class Sound():
     mixer.init()
     self.dic = {}
     self.octave = 4
-    self.volume = 5.0
+    self.volume = 1.0
     self.tempo = 1.0
     
     for note in glob.glob("./Music_Note/piano2/*.ogg"):
@@ -24,7 +24,6 @@ class Sound():
     note.set_volume(self.volume)
     note.play()
     time.sleep(self.tempo)
-    note.set_volume(0)
   
   
   def increaseOctave(self):
@@ -51,7 +50,7 @@ class Sound():
   
   def restart(self):
     self.octave = 4
-    self.volume = 5.0
+    self.volume = 1.0
 
 
 
