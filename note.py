@@ -1,15 +1,15 @@
-
-
 import glob
 from pygame import mixer
 import time
-
 
 class Sound():
   def __init__(self):
     mixer.init()
     self.dic = {}
     self.octave = 4
+    self.volume = 5.0
+    self.tempo = 1.0
+    
     for note in glob.glob("./Music_Note/piano2/*.ogg"):
       #excludes path and extension from file
       name = note[20:-4]
@@ -17,14 +17,16 @@ class Sound():
       self.dic[name] = mixer.Sound(note)
 
 
-  def play(self,note,vol = 1):
+  def play(self,note):
     note = note + str(self.octave)
     note = self.dic[note]
-    note.set_volume(vol)
+    print(self.volume)
+    note.set_volume(self.volume)
     note.play()
-    time.sleep(1.1)
-
-
+    time.sleep(self.tempo)
+    note.set_volume(0)
+  
+  
   def increaseOctave(self):
     if self.octave >= 0 and self.octave < 7:
       self.octave += 1
@@ -33,41 +35,57 @@ class Sound():
     if self.octave > 0 :
       self.octave -= 1
 
+  def increaseVolume(self):
+    if self.volume <= 8:
+      self.volume += 1.5
+  
+  def decreaseVolume(self):
+    if self.volume >= 1.5:
+      self.volume -= 1.5
 
+  def increaseTempo(self):
+    self.tempo += 0.3
 
+  def decreaseTempo(self):
+    self.tempo -= 0.3
+  
+  def restart(self):
+    self.octave = 4
+    self.volume = 5.0
 
 
 
 class Interface():
-  def playSequence(self,sound,sequence):
-    volume = 0.8
+  def playText(self,sound,sequence):
+    sound.restart()
+
     for i in range(0,len(sequence)):
       key = sequence[i]
       key = key.upper()
+      
       try:
         nextKey = sequence[i+1]
       except:
         nextKey = -1
       
       if key == '+':
-        volume = volume * 2
+        sound.increaseVolume()
       
       elif key == '-':
-        volume = volume/2
+        sound.decreaseVolume()
       
       elif key == 'O':
         #octave
         if nextKey == '+':
           sound.increaseOctave()
         if nextKey == '-':
-          sound.decreaseOctave()    
-      else:
-        try:
-          sound.play(key,volume)
-        except:
-          pass #nope
-      
-
+          sound.decreaseOctave()     
+        
+      try:
+        sound.play(key)
+      except:
+        pass
+  
 
 if __name__ == '__main__':
   UI = Interface()
