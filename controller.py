@@ -56,7 +56,7 @@ class Controller():
         
         continue
 
-      if note == " ":
+      if note == ".":
         sound.doubleVolume()
          
         continue

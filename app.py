@@ -20,7 +20,7 @@ def my_form():
 def my_form_post():
 
 		input_string = request.form['text']
-		instrument = request.form['instrument'] 
+		instrument = request.form['dropdown'] 
 
 
 		#Gets the input text and parses it

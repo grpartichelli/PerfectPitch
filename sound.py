@@ -11,7 +11,7 @@ class Sound():
     self.track = 0   # the only track
     self.time = 0    # start at the beginning
     self.channel = 0 #channel to be played
-    self.volume = 31 # volume of the note
+    self.volume = 60 # volume of the note
     self.duration =0.5 #note duration
     self.instrument= 0 
     self.octave = 0
@@ -38,7 +38,7 @@ class Sound():
     if self.volume*2 <= 127:
       self.volume = self.volume*2
     else:
-      self.volume = 31
+      self.volume = 60
       
   
 
