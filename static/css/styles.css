@@ -20,7 +20,7 @@ input[type=text] {
 input[type=submit] {
   border-radius: 3px;
   font-family: Verdana, Geneva, sans-serif;
-  background-color: #707070; /*gray*/
+  background-color: #4CAF50; /*gray*/
   opacity: 0.8;
   border: none;
   color: white;
