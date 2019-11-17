@@ -1,6 +1,6 @@
 import pygame.midi
 from midiutil.MidiFile import MIDIFile
-from constants import *
+from utils import *
 
 
 
