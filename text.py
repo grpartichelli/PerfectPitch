@@ -5,7 +5,7 @@ class Text():
 		pass
 	#Sets the text
 	def setText(self,text): 
-		self.text = text
+		self.text = text.upper()
 
 	#Parses the text to a list
 	def parseText(self):

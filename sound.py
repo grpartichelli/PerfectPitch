@@ -53,15 +53,15 @@ class Sound():
     self.mf.addNote(self.track, self.channel, note + self.octave*12, self.time, self.duration, self.volume)
   
   #Writes the midi object to a midi file
-  def writeFile(self):
-    with open("output.mid", 'wb') as outf:
+  def writeFile(self,filename):
+    with open(filename, 'wb') as outf:
       self.mf.writeFile(outf)
   
 
   #Plays the midi file
-  def playFile(self):
+  def playFile(self,filename):
     #Loads file
-    pygame.mixer.music.load("output.mid")
+    pygame.mixer.music.load(filename)
     pygame.mixer.music.play()
     while pygame.mixer.music.get_busy():
       pygame.time.wait(1000)

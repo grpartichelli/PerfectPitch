@@ -1,6 +1,7 @@
 from sound import *
 from utils import *
 
+
 class Controller():
 	instrument = 0
 	notes = []
@@ -14,7 +15,7 @@ class Controller():
 	def setNotes(self, notes):
 		self.notes = notes
 
-	def playNotes(self):
+	def playNotes(self,filename):
 		sound = Sound()
 		sound.setInstrument(self.instrument)
 
@@ -119,8 +120,8 @@ class Controller():
 				continue
 			
 			
-		sound.writeFile()
-		sound.playFile()
+		sound.writeFile(filename)
+		sound.playFile(filename)
 		
 
 

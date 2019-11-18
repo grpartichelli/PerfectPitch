@@ -1,10 +1,12 @@
 from flask import Flask, request, render_template
 import time 
-
+import glob
+import os
 from sound import *
 from controller import *
 from text import *
 from utils import *
+import datetime
 
 text = Text()
 sound = Sound()
@@ -19,6 +21,7 @@ def my_form():
 
 @app.route('/', methods=['POST'])
 def my_form_post():
+
 		input_string = request.form['text']
 		instrument = request.form['dropdown'] 
 		try:
@@ -36,12 +39,17 @@ def my_form_post():
 		#Sets the notes and instruments the control will play
 		control.setInstrument(int(instrument) - 1)
 		control.setNotes(notes)
-		#Plays them
-		control.playNotes()
-
 		
-		return render_template('my-form.html',holder = "Insert notes here")
 
+		if request.form.get("midi") == 'on':
+			filename = './songs/' + str(datetime.datetime.now().date()) + '_' + str(datetime.datetime.now().time()).replace(':', '.') + '.mid'
+
+		else:		
+			filename = 'output.mid'
+		
+		control.playNotes(filename)
+
+		return render_template('my-form.html',holder = "Insert notes here")
 
 
 
